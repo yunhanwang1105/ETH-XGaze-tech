@@ -128,19 +128,19 @@ class GazeDataset(Dataset):
                 face_img = face_img[:, :, [2, 1, 0]]  # from BGR to RGB
                 face_img = self.transform(face_img)
 
-                # Get left eye image
-                left_eye_img = self.hdf['left_eye_patch'][idx, :]
-                left_eye_img = left_eye_img[:, :, [2, 1, 0]]  # from BGR to RGB
-                left_eye_img = self.transform(left_eye_img)
-
-                # Get right eye image
-                right_eye_img = self.hdf['right_eye_patch'][idx, :]
-                right_eye_img = right_eye_img[:, :, [2, 1, 0]]  # from BGR to RGB
-                right_eye_img = self.transform(right_eye_img)
-
                 if self.load_mode == "load_single_face":
                         input = {"face": face_img}
                 elif self.load_mode == "load_multi_region":
+                        # Get left eye image
+                        left_eye_img = self.hdf['left_eye_patch'][idx, :]
+                        left_eye_img = left_eye_img[:, :, [2, 1, 0]]  # from BGR to RGB
+                        left_eye_img = self.transform(left_eye_img)
+
+                        # Get right eye image
+                        right_eye_img = self.hdf['right_eye_patch'][idx, :]
+                        right_eye_img = right_eye_img[:, :, [2, 1, 0]]  # from BGR to RGB
+                        right_eye_img = self.transform(right_eye_img)
+                        
                         input = {"left_eye": left_eye_img,
                                 "right_eye": right_eye_img,
                                 "face": face_img}
