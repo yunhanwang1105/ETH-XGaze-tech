@@ -76,7 +76,6 @@ class Trainer(object):
                     num_classes=2, # Gaze pitch and yaw
                     in_stride=self.in_stride
                 )
-            self.load_mode = "load_single_face"
 
         assert self.model is not None, "Please enter a correct model name or construct your own model then initialize it."
         # model buiding finished
@@ -245,7 +244,7 @@ class Trainer(object):
             print('the test samples save_index ', save_index, ' is not equal to the whole test set ', self.num_test)
 
         print('Tested on : ', pred_gaze_all.shape[0], ' samples')
-        np.savetxt('test_results.txt', pred_gaze_all, delimiter=',')
+        np.savetxt('within_eva_results.txt', pred_gaze_all, delimiter=',')
 
 
     def save_checkpoint(self, state, add=None):
